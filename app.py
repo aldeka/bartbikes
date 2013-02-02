@@ -14,9 +14,12 @@ def index():
     #return "Whee"
     return render_template('index.html', answer=data['answer'], more_info=more_info, chart=chart)
     
-def bart_schedule():
-    sf = timezone('America/Los_Angeles')
-    current_sf_time = datetime.datetime.now(sf)
+def bart_schedule(current_time=None):
+    if current_time:
+        current_sf_time = current_time
+    else:
+        sf = timezone('America/Los_Angeles')
+        current_sf_time = datetime.datetime.now(sf)
     
     data = {'answer': "YES"}
     
@@ -24,13 +27,15 @@ def bart_schedule():
         data['more_info'] = "WEEKEND, BABY"
         return data
         
-    if datetime.time(hour=7, minute=34) < current_sf_time.time() < datetime.time(hour=8, minute=2):
+    if datetime.time(hour=7, minute=34) < current_sf_time.time() < datetime.time(hour=8, minute=2) or \
+        datetime.time(hour=16, minute=59) < current_sf_time.time() < datetime.time(hour=18, minute=0):
         data['answer'] = "NO"
         return answer
     
-    if datetime.time(hour=6, minute=17) < current_sf_time.time() < datetime.time(hour=9, minute=5):
+    if datetime.time(hour=6, minute=17) < current_sf_time.time() < datetime.time(hour=9, minute=5) or \
+        datetime.time(hour=16, minute=12) < current_sf_time.time() < datetime.time(hour=18, minute=59):
         data['answer'] = "MAYBE"
-        data['more_info'] = "Depends where you are."
+        data['more_info'] = "Depends where you are:"
         data['chart'] = {}
         data['chart']['yellow_line'] = {}
         data['chart']['blue_line'] = {}
