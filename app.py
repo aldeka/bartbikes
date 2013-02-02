@@ -59,6 +59,16 @@ def bart_schedule(current_time=None):
     return data
     
 def populate_chart(data, current_sf_time):
+    # initialize
+    data['chart']['yellow_line']['west'] = "YES"
+    data['chart']['yellow_line']['east'] = "YES"
+    data['chart']['blue_line']['west'] = "YES"
+    data['chart']['blue_line']['east'] = "YES"
+    data['chart']['green_line']['west'] = "YES"
+    data['chart']['green_line']['east'] = "YES"
+    data['chart']['red_line']['west'] = "YES"
+    data['chart']['red_line']['east'] = "YES"
+    
     # yellow line morning data
     if datetime.time(hour=6, minute=17) < current_sf_time.time() < datetime.time(hour=8, minute=57):
         data['chart']['yellow_line']['west'] = "MAYBE"
