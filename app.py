@@ -30,7 +30,7 @@ def bart_schedule(current_time=None):
     if datetime.time(hour=7, minute=34) < current_sf_time.time() < datetime.time(hour=8, minute=2) or \
         datetime.time(hour=16, minute=59) < current_sf_time.time() < datetime.time(hour=18, minute=0):
         data['answer'] = "NO"
-        return answer
+        return data
     
     if datetime.time(hour=6, minute=17) < current_sf_time.time() < datetime.time(hour=9, minute=5) or \
         datetime.time(hour=16, minute=12) < current_sf_time.time() < datetime.time(hour=18, minute=59):
