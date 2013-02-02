@@ -1,6 +1,7 @@
 from flask import Flask
 from flask import render_template
 
+import os
 import datetime
 from pytz import timezone
 
@@ -189,4 +190,5 @@ def populate_chart(data, current_sf_time):
     return data
 
 if __name__ == "__main__":
-    app.run()
+    port = int(os.environ.get('PORT', 5000))
+    app.run(port=port)
