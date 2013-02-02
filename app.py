@@ -15,17 +15,21 @@ def index():
     
 @app.route('/testing/')
 def testing():
-    data = bart_schedule(datetime.datetime(year=2013, month=2, day=1, hour=8))
-    more_info = data['more_info'] if 'more_info' in data else None
+    data = bart_schedule(datetime.datetime(year=2013, month=2, day=1, hour=8, minute=10))
+    print "WHEEEEEE"
+    print data
+    try:
+        more_info = data['more_info']
+    except KeyError:
+        more_info = None
     chart = data['chart'] if 'chart' in data else None
     return render_template('index.html', answer=data['answer'], more_info=more_info, chart=chart)
     
 def bart_schedule(current_time=None):
+    sf = timezone('America/Los_Angeles')
+    current_sf_time = datetime.datetime.now(sf)
     if current_time:
         current_sf_time = current_time
-    else:
-        sf = timezone('America/Los_Angeles')
-        current_sf_time = datetime.datetime.now(sf)
     
     data = {'answer': "YES"}
     
@@ -49,11 +53,11 @@ def bart_schedule(current_time=None):
         data['chart']['green_line'] = {}
         data['chart']['red_line'] = {}
         
-        data = populate_chart(data)
+        data = populate_chart(data, current_sf_time)
             
     return data
     
-def populate_chart(data):
+def populate_chart(data, current_sf_time):
     # yellow line morning data
     if datetime.time(hour=6, minute=17) < current_sf_time.time() < datetime.time(hour=8, minute=57):
         data['chart']['yellow_line']['west'] = "MAYBE"
@@ -181,6 +185,8 @@ def populate_chart(data):
         data['chart']['red_line']['west'] = "NO"
     if datetime.time(hour=16, minute=40) < current_sf_time.time() < datetime.time(hour=18, minute=16):
         data['chart']['red_line']['east'] = "NO"
+        
+    return data
 
 if __name__ == "__main__":
     app.run(debug=True)
