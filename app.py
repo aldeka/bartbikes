@@ -11,7 +11,13 @@ def index():
     data = bart_schedule()
     more_info = data['more_info'] if 'more_info' in data else None
     chart = data['chart'] if 'chart' in data else None
-    #return "Whee"
+    return render_template('index.html', answer=data['answer'], more_info=more_info, chart=chart)
+    
+@app.route('/testing/')
+def testing():
+    data = bart_schedule(datetime.datetime(year=2013, month=2, day=1, hour=8))
+    more_info = data['more_info'] if 'more_info' in data else None
+    chart = data['chart'] if 'chart' in data else None
     return render_template('index.html', answer=data['answer'], more_info=more_info, chart=chart)
     
 def bart_schedule(current_time=None):
@@ -30,6 +36,7 @@ def bart_schedule(current_time=None):
     if datetime.time(hour=7, minute=34) < current_sf_time.time() < datetime.time(hour=8, minute=2) or \
         datetime.time(hour=16, minute=59) < current_sf_time.time() < datetime.time(hour=18, minute=0):
         data['answer'] = "NO"
+        data['more_info'] = 'Maybe you should get a <a target="_blank" href="http://www.amazon.com/gp/search/ref=as_li_qf_sp_sr_tl?ie=UTF8&camp=1789&creative=9325&index=aps&keywords=folding%20bike&linkCode=ur2&tag=littlegreenri-20">folding bike?</a><img src="https://www.assoc-amazon.com/e/ir?t=littlegreenri-20&l=ur2&o=1" width="1" height="1" border="0" alt="" style="border:none !important; margin:0px !important;" />'
         return data
     
     if datetime.time(hour=6, minute=17) < current_sf_time.time() < datetime.time(hour=9, minute=5) or \
