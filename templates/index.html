@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+<head>
+    <title>Can I Take My Bike On BART?</title>
+
+    <style type='text/css'>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: "Arial";
+            text-align: center;
+            font-size: 18pt;
+            font-weight: bold;
+            background: url("{{ url_for('static', filename='images/bikes.jpg') }}") repeat;
+        }
+        
+        h1 {
+            font-size: 90pt;
+            font-weight: bold;
+        }
+        
+        .yellow { background: yellow; }
+        .blue { background: blue; }
+        .green { background: green; }
+        .red { background: red; }
+        .orange { background: orange; }
+        
+        #footer {
+            font-size: 11pt;
+            padding: 20px 0;
+            width: 100%;
+            background: white;
+            font-weight: normal;
+            position: absolute;
+            bottom: 0;
+        }
+        
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+<h1>{{ answer }}</h1>
+
+{% if more_info %}
+    <p class="more_info">{{ more_info }}</p>
+{% endif %}
+
+{% if chart %}
+    <table>
+        <thead>
+        <tr>
+            <td>&nbsp;</td>
+            <td>West</td>
+            <td>East</td>
+        </tr>
+        </thead>
+        <tbody>
+            <tr class="yellow">
+                <td>Yellow Line<td>
+                <td>{{ chart.yellow_line.west }}</td>
+                <td>{{ chart.yellow_line.east }}</td>
+            </tr>
+            <tr class="blue">
+                <td>Blue Line<td>
+                <td>{{ chart.blue_line.west }}</td>
+                <td>{{ chart.blue_line.east }}</td>
+            </tr>
+            <tr class="green">
+                <td>Green Line<td>
+                <td>{{ chart.green_line.west }}</td>
+                <td>{{ chart.green_line.east }}</td>
+            </tr>
+            <tr class="red">
+                <td>Red Line<td>
+                <td>{{ chart.yellow_line.west }}</td>
+                <td>{{ chart.yellow_line.east }}</td>
+            </tr>
+            <tr class="orange">
+                <td>Orange Line<td>
+                <td>ALWAYS</td>
+                <td>ALWAYS</td>
+            </tr>
+        </tbody>
+    </table>
+{% endif %}
+
+<div id="footer">Note: this is all super approximate. The authoritative source on when you can take your bike on BART is <a href="http://www.bart.gov/schedules/bystation.aspx">here</a>.</div>
+</div>
+</body>
+</html>
