@@ -15,7 +15,7 @@ def index():
     
 @app.route('/testing/')
 def testing():
-    data = bart_schedule(datetime.datetime(year=2013, month=2, day=1, hour=8, minute=10))
+    data = bart_schedule(datetime.datetime(year=2013, month=2, day=1, hour=8, minute=1))
     print "WHEEEEEE"
     print data
     try:
