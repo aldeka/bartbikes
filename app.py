@@ -37,6 +37,13 @@ def bart_schedule(current_time=None):
     if current_sf_time.weekday() > 4:
         data['more_info'] = "WEEKEND, BABY"
         return data
+
+    if current_sf_time >= datetime.datetime(year=2013, month=7, day=1, tzinfo=sf) and current_sf_time < datetime.datetime(year=2013, month=12, day=1, tzinfo=sf):
+        if (current_sf_time.hour >= 7 and current_sf_time.hour < 9) or ( (current_sf_time.hour >= 16 and current_sf_time.minute >= 30) and (current_sf_time.hour < 18 and current_sf_time.minute < 30)):
+            data['more_info'] = "But avoid the first three cars"
+        return data
+
+    # until the trial ends, the below is irrelevant
         
     if datetime.time(hour=7, minute=34) < current_sf_time.time() < datetime.time(hour=8, minute=2) or \
         datetime.time(hour=16, minute=59) < current_sf_time.time() < datetime.time(hour=18, minute=0):
