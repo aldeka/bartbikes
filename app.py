@@ -9,10 +9,12 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    data = bart_schedule()
-    more_info = data['more_info'] if 'more_info' in data else None
-    chart = data['chart'] if 'chart' in data else None
-    return render_template('index.html', answer=data['answer'], more_info=more_info, chart=chart)
+    # data = bart_schedule()
+    # more_info = data['more_info'] if 'more_info' in data else None
+    more_info = None
+    # chart = data['chart'] if 'chart' in data else None
+    chart = None
+    return render_template('index.html', answer='<a href="http://www.sfbike.org/main/big-news-bart-votes-to-lift-bike-blackout-permanently/">YES, ALWAYS</a>', more_info=more_info, chart=chart)
     
 @app.route('/testing/')
 def testing():
